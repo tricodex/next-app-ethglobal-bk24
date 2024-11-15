@@ -16,8 +16,13 @@ export interface AgentCapability {
   
   export interface AgentConfig {
     name: string;
+    ticker: string;
     chain: string;
     capabilities: string[];
     behavior: string;
-    modelId?: string;
+    image?: File;
+    twitterLink?: string;
+    telegramLink?: string;
+    youtubeLink?: string;
+    website?: string;
   }
