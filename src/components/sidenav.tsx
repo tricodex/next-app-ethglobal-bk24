@@ -58,7 +58,7 @@ export function SideNav({ user }: { user?: any }) {
          "group-data-[state=collapsed]:justify-center"
        )}>
          <Image
-           src="/logo.png" 
+           src="/r-logo.webp" 
            alt="Runereum"
            width={32}
            height={32}
