@@ -41,7 +41,9 @@ export default function Home() {
               Create, Deploy & Trade Intelligent AI Agents. 
             </p>
             <div className="flex gap-4 justify-center">
-              <button className="lp-button">Launch App</button>
+                <button className="lp-button">
+                <a href="/dashboard">Launch App</a>
+                </button>
               <button className="lp-button bg-transparent border-2 border-white text-white">
                 Learn More
               </button>

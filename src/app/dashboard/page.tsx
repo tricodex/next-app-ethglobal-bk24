@@ -5,21 +5,17 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { DeployAgentModal } from '@/components/deploy-agent-modal';
 import { 
   Brain, 
   ChartBar, 
-//   Users, 
-//   Wallet, 
   Star, 
   Zap, 
   Activity, 
-  TrendingUp, 
-  Network,
-  Coins
+  TrendingUp 
 } from 'lucide-react';
 import Image from 'next/image';
+import type { AgentConfig } from '@/types/agent';
 
 interface Agent {
   id: number;
@@ -104,19 +100,29 @@ const agents: Agent[] = [
 
 export default function Dashboard() {
   const [searchTerm, setSearchTerm] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeployModalOpen, setIsDeployModalOpen] = useState(false);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleCloseModal = () => setIsModalOpen(false);
+
+  const handleDeploy = async (agentConfig: AgentConfig) => {
+    console.log('Deploying agent:', agentConfig);
+    await new Promise(resolve => setTimeout(resolve, 2000)); // Simulated delay
+  };
 
   return (
     <>
       <div className="min-h-screen p-8 bg-[#0A0A0A]">
         <div className="flex justify-between items-center mb-12">
           <div>
-            <h1 className="text-4xl font-bold text-white mb-2 font-audiowide">Agent Network</h1>
-            <p className="text-zinc-400">Monitor and manage your AI trading agents</p>
+            <h1 className="text-4xl font-bold text-white mb-2 brand-text">Agent Network</h1>
+            <p className="text-zinc-400">Monitor and manage your AI agents</p>
           </div>
           <Button 
             className="bg-[#FFD700] hover:bg-[#FFC700] text-black font-bold px-6"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => setIsDeployModalOpen(true)}
           >
             <Zap className="mr-2 h-4 w-4" />
             Deploy Agent
@@ -244,118 +250,11 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="sm:max-w-[600px] bg-[#0A0A0A]/95 border-zinc-800">
-          <div className="fixed inset-0 pointer-events-none">
-            <Image
-              src="/modal-bg1.png"
-              alt="Background"
-              fill
-              className="object-cover opacity-20"
-            />
-          </div>
-          
-          <DialogHeader>
-            <DialogTitle className="text-3xl font-audiowide text-center bg-gradient-to-r from-[#FFD700] to-[#FFA500] bg-clip-text text-transparent">
-              Deploy Your AI Agent
-            </DialogTitle>
-          </DialogHeader>
-
-          <div className="relative z-10 mt-6">
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <label className="text-zinc-200 font-medium">Agent Name</label>
-                <Input 
-                  placeholder="Enter a unique name..."
-                  className="bg-[#111111] border-zinc-700 text-white"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-zinc-200 font-medium">Base Model</label>
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { id: 'gpt4', name: 'GPT-4 Turbo', icon: Brain },
-                    { id: 'claude', name: 'Claude 3', icon: Brain },
-                  ].map((model) => (
-                    <Button
-                      key={model.id}
-                      variant="outline"
-                      className="border-zinc-700 bg-[#111111] hover:bg-[#1a1a1a] h-24 flex flex-col items-center justify-center gap-2"
-                    >
-                      <model.icon className="h-8 w-8 text-[#FFD700]" />
-                      <span className="text-white">{model.name}</span>
-                    </Button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-zinc-200 font-medium">Chain</label>
-                <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { id: 'base', name: 'Base Sepolia', selected: true },
-                    { id: 'op', name: 'Optimism' },
-                    { id: 'arb', name: 'Arbitrum' },
-                  ].map((chain) => (
-                    <Button
-                      key={chain.id}
-                      variant="outline"
-                      className={`border-zinc-700 ${
-                        chain.selected 
-                          ? 'bg-[#FFD700] text-black' 
-                          : 'bg-[#111111] text-white hover:bg-[#1a1a1a]'
-                      }`}
-                    >
-                      <Network className="mr-2 h-4 w-4" />
-                      {chain.name}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-zinc-200 font-medium">Capabilities</label>
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { id: 'trade', name: 'Trading', icon: Coins },
-                    { id: 'analyze', name: 'Market Analysis', icon: Brain },
-                    { id: 'automate', name: 'Task Automation', icon: Zap },
-                    { id: 'interact', name: 'Social Interaction', icon: Network },
-                  ].map((capability) => (
-                    <Button
-                      key={capability.id}
-                      variant="outline"
-                      className="border-zinc-700 bg-[#111111] hover:bg-[#1a1a1a] justify-start"
-                    >
-                      <capability.icon className="mr-2 h-4 w-4 text-[#FFD700]" />
-                      <span className="text-white">{capability.name}</span>
-                    </Button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-zinc-200 font-medium">Behavior Description</label>
-                <Textarea 
-                  placeholder="Describe how your agent should behave..."
-                  className="bg-[#111111] border-zinc-700 text-white h-24"
-                />
-              </div>
-
-              <div className="pt-4">
-                <Button className="w-full bg-[#FFD700] hover:bg-[#FFC700] text-black font-bold">
-                  <Zap className="mr-2 h-4 w-4" />
-                  Deploy Agent
-                </Button>
-                <p className="text-xs text-zinc-400 text-center mt-2">
-                  Deployment requires a small gas fee on Base Sepolia
-                </p>
-              </div>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <DeployAgentModal 
+        isOpen={isDeployModalOpen}
+        onClose={() => setIsDeployModalOpen(false)}
+        onDeploy={handleDeploy}
+      />
     </>
   );
 }

@@ -1,14 +1,8 @@
-// src/providers/sidebar-provider.tsx
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
 
 type SidebarState = "expanded" | "collapsed";
-
-// interface SidebarContext {
-//   state: SidebarState;
-//   setState: (state: SidebarState) => void;
-// }
 
 type SidebarContext = {
   state: "expanded" | "collapsed"
@@ -24,10 +18,23 @@ const SidebarContext = createContext<SidebarContext | undefined>(undefined);
 
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<SidebarState>("expanded");
+  const [open, setOpen] = useState(false);
+  const [openMobile, setOpenMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const savedState = localStorage.getItem("sidebar-state") as SidebarState;
     if (savedState) setState(savedState);
+
+    // Handle mobile detection
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const handleStateChange = (newState: SidebarState) => {
@@ -35,8 +42,23 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("sidebar-state", newState);
   };
 
+  const toggleSidebar = () => {
+    const newState = state === "expanded" ? "collapsed" : "expanded";
+    handleStateChange(newState);
+  };
+
+  const contextValue: SidebarContext = {
+    state,
+    open,
+    setOpen,
+    openMobile,
+    setOpenMobile,
+    isMobile,
+    toggleSidebar
+  };
+
   return (
-    <SidebarContext.Provider value={{ state, setState: handleStateChange }}>
+    <SidebarContext.Provider value={contextValue}>
       {children}
     </SidebarContext.Provider>
   );
