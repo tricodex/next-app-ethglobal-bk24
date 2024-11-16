@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { DeployAgentModal } from '@/components/deploy-agent-modal';
+// import { DeployAgentModal } from '@/components/deploy-agent-modal';
 import { 
   Brain, 
   ChartBar, 
@@ -15,7 +15,9 @@ import {
   TrendingUp 
 } from 'lucide-react';
 import Image from 'next/image';
-import type { AgentConfig } from '@/types/agent';
+// import type { AgentConfig } from '@/types/agent';
+import Link from 'next/link';
+
 
 interface Agent {
   id: number;
@@ -102,15 +104,15 @@ export default function Dashboard() {
   const [searchTerm, setSearchTerm] = useState('');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDeployModalOpen, setIsDeployModalOpen] = useState(false);
+//   const [isDeployModalOpen, setIsDeployModalOpen] = useState(false);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleCloseModal = () => setIsModalOpen(false);
 
-  const handleDeploy = async (agentConfig: AgentConfig) => {
-    console.log('Deploying agent:', agentConfig);
-    await new Promise(resolve => setTimeout(resolve, 2000)); // Simulated delay
-  };
+//   const handleDeploy = async (agentConfig: AgentConfig) => {
+//     console.log('Deploying agent:', agentConfig);
+//     await new Promise(resolve => setTimeout(resolve, 2000)); // Simulated delay
+//   };
 
   return (
     <>
@@ -118,15 +120,16 @@ export default function Dashboard() {
         <div className="flex justify-between items-center mb-12">
           <div>
             <h1 className="text-4xl font-bold text-white mb-2 brand-text">Agent Network</h1>
-            <p className="text-zinc-400">Monitor and manage your AI agents</p>
+            {/* <p className="text-zinc-400">Monitor and manage your AI agents</p> */}
           </div>
-          <Button 
-            className="bg-[#FFD700] hover:bg-[#FFC700] text-black font-bold px-6"
-            onClick={() => setIsDeployModalOpen(true)}
-          >
-            <Zap className="mr-2 h-4 w-4" />
-            Deploy Agent
-          </Button>
+          <Link href="/agent-control">
+  <Button 
+    className="bg-[#FFD700] hover:bg-[#FFC700] text-black font-bold px-6"
+  >
+    <Zap className="mr-2 h-4 w-4" />
+    Agent Control
+  </Button>
+</Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
@@ -250,11 +253,11 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <DeployAgentModal 
+      {/* <DeployAgentModal 
         isOpen={isDeployModalOpen}
         onClose={() => setIsDeployModalOpen(false)}
         onDeploy={handleDeploy}
-      />
+      /> */}
     </>
   );
 }
