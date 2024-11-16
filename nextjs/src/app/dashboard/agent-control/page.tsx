@@ -272,11 +272,18 @@ export default function AgentControl() {
           <p className="text-zinc-400">Deploy and manage your AI agents</p>
         </div>
         <Button 
+          className="bg-[#fafafa] hover:bg-[#FFC700] text-black font-bold px-6 ml-200"
+          onClick={() => window.location.href = '/dashboard/mint'}
+        >
+          <Zap className="mr-2 h-4 w-4" />
+Mint        
+</Button>
+        <Button 
           className="bg-[#FFD700] hover:bg-[#FFC700] text-black font-bold px-6"
           onClick={() => setIsDeployModalOpen(true)}
         >
           <Zap className="mr-2 h-4 w-4" />
-          Summon New Agent
+          Configure Agent
         </Button>
       </div>
 

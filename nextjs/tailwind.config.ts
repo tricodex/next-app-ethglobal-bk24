@@ -65,8 +65,20 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		  animation: {
+			'fade-in': 'fade-in 0.5s ease-out forwards',
+			'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+			'ping': 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
+		  },
+		  keyframes: {
+			'fade-in': {
+			  '0%': { opacity: '0', transform: 'translateY(10px)' },
+			  '100%': { opacity: '1', transform: 'translateY(0)' }
+			}
+		  },
   	}
   },
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

@@ -7,7 +7,7 @@ import {  RUNEREUM_NFT_ABI } from '@/constants/contracts';
 
 
 
-const NFT_CONTRACT_ADDRESS = '0xccd02527118641a9623Ae433D070c6cbE2C5773e';
+const NFT_CONTRACT_ADDRESS = '0x2A68777D473ba286d41D4DEE1A994e87092B7745    ';
 const PRIVATE_KEY = process.env.PRIVATE_KEY!;
 const RPC_URL = process.env.RPC_URL!;
 
