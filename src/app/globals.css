@@ -1,4 +1,5 @@
 /* globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Aldrich&family=Audiowide&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Spicy+Rice&family=Titan+One&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -44,30 +45,244 @@
     --input: 24 6% 15%;
     --ring: 24 95% 53%;
   }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
 }
 
-.lp-hero {
-  @apply relative overflow-hidden;
-  background: linear-gradient(135deg, #ff6b2c 0%, #ff9a3c 100%);
+@layer components {
+  .brand-text {
+    font-family: 'Audiowide', sans-serif;
+  }
+
+  .hero-text {
+    font-family: 'Titan One', sans-serif;
+  }
+
+  .gradient-text {
+    @apply text-transparent bg-clip-text relative;
+    background-image: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  }
+
+  .curved-section-divider {
+    @apply absolute bottom-0 left-0 right-0 h-[250px] z-10;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.95) 100%);
+    clip-path: path('M0,250 C480,100 960,100 1440,250 L1440,250 L0,250 Z');
+  }
+  
+  .glass-card {
+    @apply bg-white/15 backdrop-blur-lg border border-white/30 relative overflow-hidden;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
+  }
+
+  .glass-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 transition-opacity duration-300;
+  }
+
+  .glass-card:hover::before {
+    @apply opacity-100;
+  }
+
+  .lp-button {
+    @apply inline-flex items-center px-6 py-3 rounded-full font-semibold
+           transition-all duration-300 hover:scale-105 focus:outline-none
+           focus:ring-2 focus:ring-offset-2 relative overflow-hidden;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  }
+
+  .lp-button.transparent {
+    @apply bg-white/10 backdrop-blur-sm border border-white/20 text-white;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+  }
+
+  .feature-grid {
+    @apply grid gap-8;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
 }
 
-.lp-hero-glow {
-  @apply absolute w-[200%] h-[200%] top-[-50%] left-[-50%] animate-slow-spin;
-  background: radial-gradient(circle, rgba(255,155,60,0.2) 0%, rgba(255,107,44,0) 70%);
+@layer utilities {
+  .parallax-scroll {
+    @apply will-change-transform;
+    transition: transform 0.1s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  .parallax-container {
+    @apply relative overflow-hidden;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+
+  .parallax-element {
+    @apply will-change-transform;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: transform 0.01s linear;
+  }
+  
+  .parallax-bg {
+    @apply fixed inset-0 w-full h-full;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+  
+  .parallax-content {
+    @apply relative z-10;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+
+  .wave-shape {
+    @apply absolute bottom-0 left-0 right-0 h-[150px] z-10;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.95) 100%);
+    clip-path: path('M0,64 C320,120 480,20 640,64 C800,108 960,20 1120,64 C1280,108 1440,20 1600,64 L1600,180 L0,180 Z');
+  }
+
+  .wave-shape-content {
+    @apply absolute bottom-0 left-0 right-0 bg-black/95 h-[150px];
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite, fadeIn 1s ease-out forwards;
+  }
+
+  .animate-reveal {
+    animation: reveal 1s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.8s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  }
+
+  .shadow-soft {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
 }
 
-.lp-button {
-  @apply inline-flex items-center px-6 py-3 rounded-full font-semibold
-         transition-all duration-300 bg-white text-primary hover:bg-opacity-90
-         hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary
-         focus:ring-offset-2;
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.01);
+  }
 }
 
-@keyframes slow-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+  }
+  to { 
+    opacity: 1; 
+  }
 }
 
-.animate-slow-spin {
-  animation: slow-spin 20s linear infinite;
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeScale {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.transition-width {
+  transition: width 0.2s ease-in-out;
+}
+
+.transition-transform {
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Responsive Utilities */
+@screen md {
+  .wave-shape {
+    height: 180px;
+  }
+}
+
+@screen lg {
+  .wave-shape {
+    height: 200px;
+  }
+}
+
+/* Dark Mode Enhancements */
+.dark .glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+}
+
+.dark .lp-button.transparent {
+  @apply border-white/10;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
 }

@@ -17,11 +17,11 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Runereum | Bitcoin Rune AI Agent",
-  description: "Intelligent AI agent for Bitcoin Rune management and optimization",
+  description: "Bitcoin Rune AI Agent",
   keywords: ["Bitcoin", "Rune", "AI", "Blockchain", "DeFi"],
   openGraph: {
     title: "Runereum",
-    description: "Intelligent AI agent for Bitcoin Rune management",
+    description: "Bitcoin Rune EVM AI Agent",
     type: "website",
   },
 };
