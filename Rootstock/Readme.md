@@ -8,6 +8,4 @@ Our team is a fully stack behemoth. With a diverse background being from San Die
 
 - Instructions are not availibile. 
 
-Our team is a fully stack behemoth. With a diverse background being from San Diego, Amsterdam, Panama, Singapore, and Shanghai. We have soul bonded over this hack and will easily dominate the industry with our combined power. 
-
 Honestly I was disapointed that I wasn't able to implement my idea. I had the team I needed to pull it off. It would've been done lunch. We had to ice the idea and had to pivot the entire project, change all the branding, etc. Overall it was enjoyable and easy to use the documentation was easy to use and understand. Our team is interested in continuing this project.
