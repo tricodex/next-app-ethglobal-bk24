@@ -11,6 +11,34 @@ import { WagmiProvider, createConfig, http } from 'wagmi';
 import { baseSepolia } from 'wagmi/chains';
 import { coinbaseWallet } from 'wagmi/connectors';
 import { OnchainKitProvider } from '@coinbase/onchainkit';
+import type { Chain } from "viem";
+
+// Define the chain configuration
+const chain: Chain = {
+  id: 84532, // Base Sepolia chain ID
+  name: 'Base Sepolia',
+  // network: 'base-sepolia',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'Ether',
+    symbol: 'ETH',
+  },
+  rpcUrls: {
+    default: { 
+      http: ['https://sepolia.base.org']
+    },
+    public: {
+      http: ['https://sepolia.base.org']
+    }
+  },
+  blockExplorers: {
+    default: {
+      name: 'BaseScan',
+      url: 'https://sepolia.basescan.org'
+    },
+  },
+  testnet: true
+};
 
 const wagmiConfig = createConfig({
   chains: [baseSepolia],
@@ -42,7 +70,7 @@ const DashboardContent = ({ children }: { children: ReactNode }) => {
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <WagmiProvider config={wagmiConfig}>
-      <OnchainKitProvider chain={baseSepolia}>
+      <OnchainKitProvider chain={chain}>
         <TooltipProvider>
           <SidebarProvider>
             <div className="flex min-h-screen bg-background">
