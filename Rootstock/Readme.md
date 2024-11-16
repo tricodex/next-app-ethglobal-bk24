@@ -1,1 +1,1 @@
-OUr plan was to use Rootstock as an intermediary bridging between Bitcoin & Ethereum; this would allow a Bitcoin Rune to be used as a software key (soul) manipulated by a master control panel on Rootstock.
+Our plan was to use Rootstock as an intermediary bridging between Bitcoin & Ethereum; this would allow a Bitcoin Rune to be used as a software key (soul) manipulated by a master control panel on Rootstock.
