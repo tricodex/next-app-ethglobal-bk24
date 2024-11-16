@@ -1,7 +1,7 @@
 {
   "name": "hardhat-project",
   "scripts": {
-    "deploy": "hardhat ignition deploy ignition/modules/Runereum.ts",
+    "deploy": "hardhat ignition deploy ignition/modules/RunereumNFT.ts",
     "compile": "hardhat compile",
     "test": "hardhat test"
   },
