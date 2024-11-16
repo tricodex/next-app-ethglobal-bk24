@@ -122,7 +122,7 @@ export default function Dashboard() {
             <h1 className="text-4xl font-bold text-white mb-2 brand-text">Agent Network</h1>
             {/* <p className="text-zinc-400">Monitor and manage your AI agents</p> */}
           </div>
-          <Link href="/agent-control">
+          <Link href="/dashboard/agent-control">
   <Button 
     className="bg-[#FFD700] hover:bg-[#FFC700] text-black font-bold px-6"
   >
