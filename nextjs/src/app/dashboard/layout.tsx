@@ -3,21 +3,25 @@
 
 import { ReactNode } from "react";
 import { Header } from "./header";
-import { SideNav } from "@/components/sidenav";
-import { SidebarProvider } from "@/providers/sidebar-provider";
-import { useSidebar } from "@/providers/sidebar-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { WagmiProvider, createConfig, http } from 'wagmi';
 import { baseSepolia } from 'wagmi/chains';
 import { coinbaseWallet } from 'wagmi/connectors';
 import { OnchainKitProvider } from '@coinbase/onchainkit';
-import type { Chain } from "viem";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-// Define the chain configuration
-const chain: Chain = {
-  id: 84532, // Base Sepolia chain ID
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
+const chain = {
+  id: 84532,
   name: 'Base Sepolia',
-  // network: 'base-sepolia',
   nativeCurrency: {
     decimals: 18,
     name: 'Ether',
@@ -44,7 +48,7 @@ const wagmiConfig = createConfig({
   chains: [baseSepolia],
   connectors: [
     coinbaseWallet({
-      appName: 'CDP AgentKit Demo',
+      appName: 'Runereum',
     }),
   ],
   ssr: true,
@@ -53,36 +57,21 @@ const wagmiConfig = createConfig({
   },
 });
 
-const DashboardContent = ({ children }: { children: ReactNode }) => {
-  const { state } = useSidebar();
-
-  return (
-    <main
-      className={`flex-1 transition-all duration-300 ease-in-out ${
-        state === "expanded" ? "ml-56" : "ml-16"
-      }`}
-    >
-      {children}
-    </main>
-  );
-};
-
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
-    <WagmiProvider config={wagmiConfig}>
-      <OnchainKitProvider chain={chain}>
-        <TooltipProvider>
-          <SidebarProvider>
-            <div className="flex min-h-screen bg-background">
-              <SideNav />
-              <div className="flex-1">
-                <Header showMintAgent={true} />
-                <DashboardContent>{children}</DashboardContent>
-              </div>
+    <QueryClientProvider client={queryClient}>
+      <WagmiProvider config={wagmiConfig}>
+        <OnchainKitProvider chain={chain}>
+          <TooltipProvider>
+            <div className="flex min-h-screen flex-col bg-background">
+              <main className="flex-1">
+                <Header />
+                {children}
+              </main>
             </div>
-          </SidebarProvider>
-        </TooltipProvider>
-      </OnchainKitProvider>
-    </WagmiProvider>
+          </TooltipProvider>
+        </OnchainKitProvider>
+      </WagmiProvider>
+    </QueryClientProvider>
   );
 }

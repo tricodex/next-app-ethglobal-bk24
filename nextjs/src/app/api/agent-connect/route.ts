@@ -4,6 +4,7 @@ import type { NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const data = await request.json();
     
     // Here integrate with Python CDP AgentKit

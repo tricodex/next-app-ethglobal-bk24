@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // src/app/agent-control/page.tsx
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,15 +15,12 @@ import {
   Zap, 
   Activity, 
   Power,
-  Settings,
   Trash2,
   PauseCircle,
-  Terminal,
-  Code,
+
   MessageSquare,
   Bot,
-  BarChart3,
-  Play,
+
   Twitter,
   Youtube,
   MessageCircle,
