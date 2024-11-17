@@ -5,7 +5,7 @@ from langchain.prompts import PromptTemplate
 from langchain.llms import OpenAI
 
 # 设置 OpenAI API 密钥
-openai.api_key = "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"
+openai.api_key = "api_key"
 
 # LangChain 设置
 llm = OpenAI(temperature=0.7)
@@ -22,7 +22,7 @@ prompt = PromptTemplate(input_variables=["tweet_text"], template=prompt_template
 chain = LLMChain(llm=llm, prompt=prompt)
 
 # Twitter API 配置
-BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAAYDxAEAAAAAUovwCYi15IECAzYkY0Lm4BCejkI%3DEWXYdgOQPjBdgRqJh9wNCrRgfSedDcU44nM8sV7In4BmQq7Hg6"
+BEARER_TOKEN = "BEARER_TOKEN"
 
 # 认证使用 API v2
 client = tweepy.Client(bearer_token=BEARER_TOKEN)

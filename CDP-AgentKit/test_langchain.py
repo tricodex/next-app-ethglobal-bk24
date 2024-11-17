@@ -4,7 +4,7 @@ from langchain.prompts import PromptTemplate
 from langchain_openai import OpenAI
 
 # 设置 OpenAI API 密钥
-api_key = "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"
+api_key = "api_key"
 
 llm = OpenAI(temperature=0.7, openai_api_key=api_key)
 

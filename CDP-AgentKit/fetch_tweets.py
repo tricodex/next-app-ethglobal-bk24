@@ -1,7 +1,7 @@
 import tweepy
 
 # 1. Twitter API 配置
-BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAAYDxAEAAAAAUovwCYi15IECAzYkY0Lm4BCejkI%3DEWXYdgOQPjBdgRqJh9wNCrRgfSedDcU44nM8sV7In4BmQq7Hg6"  # 用你的 Bearer Token 替换
+BEARER_TOKEN = "Bearer Token"  # 用你的 Bearer Token 替换
 
 # 2. 认证使用 API v2
 client = tweepy.Client(bearer_token=BEARER_TOKEN)

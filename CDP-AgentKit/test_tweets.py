@@ -7,7 +7,7 @@ ACCESS_TOKEN = "1479793321950150659-crZeudfoglPDa6ueswk6Aw10QhsxAw"
 ACCESS_SECRET = "R0L0jH5Omx7OYcZmYHwC6TY8KtKzbDo81fSTNBhny2fbp"
 
 # Authenticate using API v2
-client = tweepy.Client(bearer_token="AAAAAAAAAAAAAAAAAAAAAAYDxAEAAAAAUovwCYi15IECAzYkY0Lm4BCejkI%3DEWXYdgOQPjBdgRqJh9wNCrRgfSedDcU44nM8sV7In4BmQq7Hg6")
+client = tweepy.Client(bearer_token="bearer_token")
 
 # Search tweets using v2
 try:
