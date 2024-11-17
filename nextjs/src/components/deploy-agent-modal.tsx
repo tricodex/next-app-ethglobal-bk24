@@ -12,7 +12,6 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { FileUploader, FileUploaderContent, FileUploaderItem, FileInput } from '@/components/ui/file-upload';
 import { SUPPORTED_CAPABILITIES, SUPPORTED_CHAINS } from '@/lib/constants/agent';
 import type { AgentConfig } from '@/types/agent';
 import { cn } from '@/lib/utils';
@@ -148,35 +147,7 @@ export const DeployAgentModal = ({
               {/* Image Upload */}
               <div className="space-y-2">
                 <label className="text-zinc-200 font-medium">Image</label>
-                <FileUploader
-                  value={selectedFile}
-                  onValueChange={setSelectedFile}
-                  dropzoneOptions={{
-                    maxFiles: 1,
-                    accept: {
-                      'image/*': ['.jpg', '.jpeg', '.png', '.gif']
-                    }
-                  }}
-                >
-                  <FileInput>
-                    <div className="h-32 rounded-lg border-2 border-dashed border-zinc-700 bg-[#111111] flex items-center justify-center">
-                      {selectedFile?.length ? (
-                        <FileUploaderContent>
-                          {selectedFile.map((file, i) => (
-                            <FileUploaderItem key={i} index={i}>
-                              {file.name}
-                            </FileUploaderItem>
-                          ))}
-                        </FileUploaderContent>
-                      ) : (
-                        <div className="text-zinc-400 text-center">
-                          <p>Drag & drop an image</p>
-                          <p className="text-sm">or click to browse</p>
-                        </div>
-                      )}
-                    </div>
-                  </FileInput>
-                </FileUploader>
+                {/* Remove FileUploader component */}
               </div>
 
               {/* Agent Details */}

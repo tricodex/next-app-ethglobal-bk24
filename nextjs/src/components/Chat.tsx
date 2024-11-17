@@ -147,7 +147,7 @@ const Chat = ({ agent, className }: ChatProps): JSX.Element => {
               Connected to {agent.name}
             </h3>
             <div className="flex flex-col items-center gap-2 text-sm text-zinc-400">
-              
+              <a
                 href={`${BLOCK_EXPLORER_URL}/address/${AGENT_ADDRESS}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -194,7 +194,7 @@ const Chat = ({ agent, className }: ChatProps): JSX.Element => {
                 {msg.transactionHash && (
                   <>
                     <span>•</span>
-                    
+                    <a
                       href={msg.blockExplorerUrl}
                       target="_blank"
                       rel="noopener noreferrer"
