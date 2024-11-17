@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import type { AgentConfig } from '@/types/agent';
+import Chat from '@/components/Chat';
 
 interface Agent {
   id: number;
@@ -124,8 +125,6 @@ export default function AgentControl() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isDeployModalOpen, setIsDeployModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
-  const [currentMessage, setCurrentMessage] = useState('');
-  const [messages, setMessages] = useState<{role: 'user' | 'agent', content: string}[]>([]);
 
   const handleDeploy = async (agentConfig: AgentConfig) => {
     try {
@@ -192,28 +191,6 @@ export default function AgentControl() {
     if (selectedAgent?.id === agentId) {
       setSelectedAgent(null);
     }
-  };
-
-  const handleMessageSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!currentMessage.trim() || !selectedAgent) return;
-
-    const userMessage = {
-      role: 'user' as const,
-      content: currentMessage
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setCurrentMessage('');
-
-    // Simulate agent response
-    setTimeout(() => {
-      const agentMessage = {
-        role: 'agent' as const,
-        content: `Processing request: "${currentMessage}". Agent ${selectedAgent.name} is analyzing...`
-      };
-      setMessages(prev => [...prev, agentMessage]);
-    }, 1000);
   };
 
   const handleCodeUpdate = (agentId: number, newCode: string) => {
@@ -671,42 +648,22 @@ Mint
                   </TabsContent>
 
                   <TabsContent value="chat" className="space-y-4">
-                    <div className="h-[500px] flex flex-col">
-                      <div className="flex-1 bg-zinc-900/50 p-4 rounded-lg overflow-y-auto mb-4">
-                        {messages.map((msg, index) => (
-                          <div
-                            key={index}
-                            className={`mb-4 ${
-                              msg.role === 'user' ? 'text-right' : 'text-left'
-                            }`}
-                          >
-                            <div
-                              className={`inline-block p-3 rounded-lg ${
-                                msg.role === 'user'
-                                  ? 'bg-[#FFD700] text-black ml-12'
-                                  : 'bg-zinc-800 text-white mr-12'
-                              }`}
-                            >
-                              {msg.content}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                      <form onSubmit={handleMessageSubmit} className="flex gap-2">
-                        <Input
-                          value={currentMessage}
-                          onChange={(e) => setCurrentMessage(e.target.value)}
-                          placeholder="Type your message..."
-                          className="flex-1 bg-[#111111] border-zinc-800 text-white"
-                        />
-                        <Button 
-                          type="submit"
-                          className="bg-[#FFD700] hover:bg-[#FFC700] text-black"
-                        >
-                          <MessageSquare className="w-4 h-4" />
-                        </Button>
-                      </form>
-                    </div>
+                    {selectedAgent ? (
+                      <Chat 
+                        agent={selectedAgent}
+                        className="min-h-[500px]"
+                      />
+                    ) : (
+                      <Card className="bg-zinc-900 border-zinc-800">
+                        <CardContent className="p-8 text-center">
+                          <Bot className="w-12 h-12 text-zinc-400 mx-auto mb-4" />
+                          <h3 className="text-lg font-medium text-white">Select an Agent</h3>
+                          <p className="text-sm text-zinc-400 mt-2">
+                            Choose an agent from the list to start chatting
+                          </p>
+                        </CardContent>
+                      </Card>
+                    )}
                   </TabsContent>
                 </Tabs>
               </CardContent>
