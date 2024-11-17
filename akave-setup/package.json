@@ -1,0 +1,19 @@
+{
+  "name": "akave-item",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "create-bucket": "node src/createBucket.js"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.9.36"
+  }
+}
